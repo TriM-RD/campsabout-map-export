@@ -1,5 +1,5 @@
 {
-  "name": "@watergis/maplibre-gl-export",
+  "name": "campsabout-map-export",
   "version": "1.0.0",
   "description": "This repository to manage plugin of maplibre-gl-export.",
   "scripts": {
@@ -20,8 +20,7 @@
   },
   "homepage": "https://github.com/watergis/maplibre-gl-export#readme",
   "devDependencies": {
-    "@changesets/cli": "^2.27.9",
-    "lefthook": "^1.8.2"
+    "@changesets/cli": "^2.27.9"
   },
   "packageManager": "pnpm@9.14.4",
   "engines": {

@@ -503,7 +503,13 @@ export abstract class MapGeneratorBase {
 	) {
 		const canvas = renderMap.getCanvas();
 
-		const fileName = `${this.fileName}.${this.format}`;
+		//const fileName = `${this.fileName}.${this.format}`;
+		const fileName = `${this.fileName}.pdf`;
+
+		if (window.sessionStorage.getItem('generateLegend') == 'true') this.toPNG(canvas, fileName);
+		else this.toPDF(renderMap, fileName);
+
+		/* // Code for selecting output type that came with the library
 		switch (this.format) {
 			case Format.PNG:
 				this.toPNG(canvas, fileName);
@@ -521,6 +527,7 @@ export abstract class MapGeneratorBase {
 				console.error(`Invalid file format: ${this.format}`);
 				break;
 		}
+		*/
 
 		renderMap.remove();
 		hiddenDiv.parentNode?.removeChild(hiddenDiv);
@@ -540,11 +547,19 @@ export abstract class MapGeneratorBase {
 	 * @param fileName file name
 	 */
 	private toPNG(canvas: HTMLCanvasElement, fileName: string) {
+		const imgElement = document.getElementById('MapImage') as HTMLImageElement;
+		if (imgElement) imgElement.src = canvas.toDataURL();
+		const exportButtonElement = document.getElementById('ExportButton') as HTMLButtonElement;
+		if (exportButtonElement) exportButtonElement.click();
+		console.log('Map exported');
+		return;
+		/* //Old code for exporting a PNG without a legend
 		const a = document.createElement('a');
 		a.href = canvas.toDataURL();
 		a.download = fileName;
 		a.click();
 		a.remove();
+		*/
 	}
 
 	/**
@@ -552,6 +567,7 @@ export abstract class MapGeneratorBase {
 	 * @param canvas Canvas element
 	 * @param fileName file name
 	 */
+	/*
 	private toJPEG(canvas: HTMLCanvasElement, fileName: string) {
 		const uri = canvas.toDataURL('image/jpeg', 0.85);
 		const a = document.createElement('a');
@@ -560,6 +576,7 @@ export abstract class MapGeneratorBase {
 		a.click();
 		a.remove();
 	}
+	*/
 
 	/**
 	 * Convert Map object to PDF
@@ -602,6 +619,7 @@ export abstract class MapGeneratorBase {
 	 * @param canvas Canvas element
 	 * @param fileName file name
 	 */
+	/*
 	private toSVG(canvas: HTMLCanvasElement, fileName: string) {
 		const uri = canvas.toDataURL('image/png');
 
@@ -626,6 +644,7 @@ export abstract class MapGeneratorBase {
 		a.click();
 		a.remove();
 	}
+	*/
 
 	/**
 	 * Convert mm/inch to pixel

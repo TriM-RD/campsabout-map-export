@@ -141,6 +141,7 @@ export default class MaplibreExportControl implements IControl {
 		);
 		table.appendChild(tr2);
 
+		/*
 		const tr3 = this.createSelection(
 			Format,
 			this.getTranslation().Format,
@@ -149,6 +150,7 @@ export default class MaplibreExportControl implements IControl {
 			(data: { [key: string]: unknown }, key) => data[key]
 		);
 		table.appendChild(tr3);
+		*/
 
 		const tr4 = this.createSelection(
 			DPI,
@@ -158,6 +160,16 @@ export default class MaplibreExportControl implements IControl {
 			(data: { [key: string]: unknown }, key) => data[key]
 		);
 		table.appendChild(tr4);
+
+		const legendOptions = { Yes: 'true', No: 'false' };
+		const tr5 = this.createSelection(
+			legendOptions,
+			'Generate Legend',
+			'generate-legend',
+			'false',
+			(data: { [key: string]: unknown }, key) => data[key]
+		);
+		table.appendChild(tr5);
 
 		this.exportContainer.appendChild(table);
 
@@ -172,25 +184,34 @@ export default class MaplibreExportControl implements IControl {
 			const pageOrientation: HTMLSelectElement = <HTMLSelectElement>(
 				document.getElementById('mapbox-gl-export-page-orientation')
 			);
+			/*
 			const formatType: HTMLSelectElement = <HTMLSelectElement>(
 				document.getElementById('mapbox-gl-export-format-type')
 			);
+			*/
 			const dpiType: HTMLSelectElement = <HTMLSelectElement>(
 				document.getElementById('mapbox-gl-export-dpi-type')
+			);
+			const generateLegend: HTMLSelectElement = <HTMLSelectElement>(
+				document.getElementById('mapbox-gl-export-generate-legend')
 			);
 			const orientValue = pageOrientation.value;
 			let pageSizeValue = JSON.parse(pageSize.value);
 			if (orientValue === PageOrientation.Portrait) {
 				pageSizeValue = pageSizeValue.reverse();
 			}
+			window.sessionStorage.setItem('ExportPageSize', JSON.stringify(pageSizeValue));
+			window.sessionStorage.setItem('generateLegend', generateLegend.value);
 			this.generateMap(
 				map,
 				pageSizeValue,
 				Number(dpiType.value) as DPIType,
-				formatType.value as FormatType,
+				//formatType.value as FormatType,
+				Format.PNG,
 				Unit.mm,
 				this.options.Filename
 			);
+			//TODO dodati opciju da se stvar isprinta bez legende
 		});
 		this.exportContainer.appendChild(generateButton);
 

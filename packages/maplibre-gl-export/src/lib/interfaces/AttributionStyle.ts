@@ -9,6 +9,6 @@ export interface AttributionStyle {
 export interface AttributionOptions {
 	style?: AttributionStyle;
 	visibility?: 'visible' | 'none';
-	// TODO: top-left and bottom-left have issues of text-max-width setting
+	// TODO: top-left and bottom-left have issues of text-max-width setting //this was here when Vjeko forked the repository
 	position?: 'top-right' | 'bottom-right';
 }
