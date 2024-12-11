@@ -2,6 +2,7 @@
   "name": "campsabout-map-export",
   "version": "1.0.0",
   "description": "This repository to manage plugin of maplibre-gl-export.",
+  "main": "index.js",
 	"type": "module",
   "scripts": {
     "lint": "pnpm -r lint",
