@@ -2,6 +2,19 @@
   "name": "campsabout-map-export",
   "version": "1.0.0",
   "description": "This repository to manage plugin of maplibre-gl-export.",
+	"main": "packages/mapbox-gl-export/dist/mapbox-gl-export.umd.js",
+	"module": "packages/mapbox-gl-export/dist/mapbox-gl-export.es.js",
+	"exports": {
+		".": {
+			"import": "./packages/mapbox-gl-export/dist/mapbox-gl-export.es.js",
+			"require": "./packages/mapbox-gl-export/dist/mapbox-gl-export.umd.js",
+			"types": "./packages/mapbox-gl-export/dist/types/index.d.ts"
+		},
+		"./packages/mapbox-gl-export/dist/mapbox-gl-export.css": {
+			"import": "./packages/mapbox-gl-export/dist/mapbox-gl-export.css",
+			"require": "./packages/mapbox-gl-export/dist/mapbox-gl-export.css"
+		}
+	},
   "scripts": {
     "lint": "pnpm -r lint",
     "format": "pnpm -r format",
